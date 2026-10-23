@@ -1,0 +1,32 @@
+/* HFPC 網頁外殼（5.0 W5-W）：頁首模式列＋同源 iframe；色彩沿用公開版的醫療藍灰 */
+:root{--ground:#F5F8FA;--surface:#FFFFFF;--ink:#15242D;--ink-2:#44576A;--line:#D3DEE5;--accent:#1E5A78;--accent-ink:#FFFFFF;--accent-soft:#E3EEF4;--focus:#0B67C2;--em:#A8231B;--em-soft:#FBE9E7;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ground:#0F171C;--surface:#16222A;--ink:#E6EEF2;--ink-2:#A7B8C3;--line:#2E404B;--accent:#7FB6D3;--accent-ink:#0F171C;--accent-soft:#1D3441;--focus:#8CC4FF;--em:#FF8A80;--em-soft:#3A1B19;color-scheme:dark}}
+[hidden]{display:none !important}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.55 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.shell-top{background:var(--surface);border-bottom:1px solid var(--line);flex:0 0 auto}
+.shell-bar{max-width:1180px;margin:0 auto;padding:8px 16px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between}
+.shell-brand{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--accent)}
+.shell-brand .mark{width:26px;height:26px}
+.shell-brand span{color:var(--ink)}
+.modes{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.mode{appearance:none;font:inherit;font-weight:700;min-height:44px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--accent);background:var(--surface);color:var(--accent);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;touch-action:manipulation}
+.mode[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.mode.ws{background:var(--accent);color:var(--accent-ink)}
+.modes[aria-busy="true"]{opacity:.6}
+.shell-banner{background:var(--em-soft);color:var(--em);padding:10px 16px;font-weight:700;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{appearance:none;font:inherit;font-weight:700;border-radius:8px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);min-height:36px;padding:6px 12px;cursor:pointer}
+.shell-main{flex:1 1 auto;min-height:0;position:relative;display:flex;flex-direction:column}
+.shell-note{max-width:720px;margin:16px auto 0;padding:0 16px;width:100%}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:10px}
+.panel h2{margin:0;font-size:1.2em}
+.panel p{margin:0}
+.frames{flex:1 1 auto;min-height:0;display:flex}
+.app-frame{flex:1 1 auto;width:100%;height:100%;border:0;display:block;background:var(--ground)}
+.shell-foot{flex:0 0 auto;border-top:1px solid var(--line);background:var(--surface);color:var(--ink-2);font-size:.82em;padding:4px 16px;display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center}
+.shell-about summary{cursor:pointer}
+.shell-about p{margin:4px 0;max-width:760px}
+.shell-about[open]{flex-basis:100%;max-height:40vh;overflow:auto}
+@media print{.shell-top,.shell-foot,.shell-banner{display:none !important}body{height:auto;overflow:visible}}

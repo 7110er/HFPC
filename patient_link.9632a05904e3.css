@@ -1,0 +1,57 @@
+/* 病人連結版專用（加在公開版樣式後面） */
+.lk-status { margin: 8px 0 0; padding: 8px 12px; border-radius: 8px; background: var(--panel-2, #f1f5f9); font-weight: 600; min-height: 1.5em; }
+.lk-status:empty, .lk-status[data-state="IDLE"] { display: none; }
+.lk-status.ok { background: #e7f5ec; color: #14532d; }
+.lk-status.err { background: #fdecec; color: #7f1d1d; }
+.lk-status.warn { background: #fff7e0; color: #713f12; }
+.lk-date { display: grid; gap: 6px; margin-top: 12px; font-weight: 600; }
+.lk-date input { font: inherit; padding: 10px; border: 1px solid #94a3b8; border-radius: 8px; max-width: 220px; }
+.lk-list { margin: 4px 0 12px 1.2em; }
+.lk-weight { display: grid; gap: 6px; margin: 8px 0; font-weight: 600; }
+.lk-weight input { font: inherit; font-size: 1.25rem; padding: 10px; border: 1px solid #94a3b8; border-radius: 8px; max-width: 180px; }
+.lk-notice { border-left: 6px solid #b45309; background: #fff7e0; color: #422006; padding: 12px 16px; border-radius: 8px; margin: 12px 0; }
+.lk-team h3 { font-size: 1.05rem; margin: 12px 0 4px; }
+.lk-team .muted { margin-left: 4px; }
+@media (prefers-color-scheme: dark) {
+  .lk-status.ok { background: #0f3a22; color: #d1fae5; }
+  .lk-status.err { background: #4a1414; color: #fee2e2; }
+  .lk-status.warn { background: #3f3310; color: #fef3c7; }
+  .lk-notice { background: #3f3310; color: #fef3c7; }
+}
+@media print { .lk-save, .lk-weight, [data-act="lk_weight"] { display: none !important; } .lk-notice, .lk-team { break-inside: avoid; } }
+/* 接續上次／這次先做（精準照護計畫，schema 3.7） */
+.lk-plan h2 { font-size: 1.25rem; margin: 12px 0 6px; }
+.lk-plan h3 { font-size: 1.05rem; margin: 12px 0 4px; }
+.lk-acts { margin: 4px 0 12px 1.4em; }
+.lk-acts li { margin: 0 0 10px; line-height: 1.6; }
+.lk-acts li[data-tier="G0"], .lk-acts li[data-tier="G1"] { border-left: 5px solid #b91c1c; padding-left: 8px; }
+.lk-chip { display: inline-block; font-size: .85rem; padding: 1px 8px; border-radius: 999px; background: #e0e7ef; color: #1e293b; }
+.lk-done li { color: #14532d; }
+@media (prefers-color-scheme: dark) { .lk-chip { background: #334155; color: #e2e8f0; } .lk-done li { color: #bbf7d0; } }
+@media print { .lk-plan { break-inside: avoid; } }
+.lk-large { font-size: 1.15em; }
+.lk-large .small { font-size: 1rem; }
+/* 3.0.0：送出狀態固定在結果頁最上面（捲到哪裡都看得到）；顏色不是唯一線索（文字寫清楚） */
+.lk-sticky { position: sticky; top: var(--sticky-top, 0px); z-index: 5; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 14px; margin: 0 0 10px; border-radius: 8px; font-weight: 600; border: 2px solid #b45309; background: #fff7e0; color: #422006; }
+.lk-sticky.ok { border-color: #15803d; background: #e7f5ec; color: #14532d; }
+.lk-sticky.pending { border-color: #1d4ed8; background: #e8effd; color: #1e3a8a; }
+.lk-stage { padding: 6px 10px; border-left: 5px solid #1d4ed8; background: #eef3fb; border-radius: 6px; }
+.lk-floor { margin: 10px 0; }
+@media (prefers-color-scheme: dark) {
+  .lk-sticky { background: #3f3310; color: #fef3c7; } .lk-sticky.ok { background: #0f3a22; color: #d1fae5; } .lk-sticky.pending { background: #1e2a4a; color: #dbeafe; }
+  .lk-stage { background: #1e2a4a; }
+}
+@media print { .lk-sticky { position: static; } }
+
+/* 3.4（T09）：固定在畫面下方的儲存列；safe-area 留白；頁面底部留同高空間 */
+.lk-dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between;
+  padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px)); background: #fff; border-top: 2px solid #1d4ed8; box-shadow: 0 -2px 8px rgba(0,0,0,.12); }
+.lk-dock .btn { min-height: 44px; }
+body:has(#lk_dock) { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+@media print { .lk-dock { display: none; } }
+
+/* v4.3 X05：119 一律在最上層；固定儲存鈕存在時跳轉條不顯示（第一個螢幕只有一個主要按鈕） */
+.lk-emergency { flex-basis: 100%; font-weight: 700; }
+.lk-emergency a { font-weight: 800; }
+body:has(.lk-dock) .lk-jump { display: none !important; }
+

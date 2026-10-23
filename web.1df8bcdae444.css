@@ -1,0 +1,7 @@
+/* HFPC 網頁子頁共用（5.0 W5-W）：登入畫面、病人視角預覽提示、版本提示 */
+.web-banner{background:#FBE9E7;color:#A8231B;padding:10px 16px;font-weight:700;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.web-preview-note{background:#FFF7E0;color:#6B4A00;border-bottom:2px solid #E3C766;padding:10px 16px;font-weight:700}
+.gsi-btn{min-height:48px}
+#web_logout{margin-left:auto}
+@media (prefers-color-scheme: dark){.web-banner{background:#3A1B19;color:#FF8A80}.web-preview-note{background:#302A12;color:#E3C766}}
+@media print{.web-preview-note,.web-banner,#web_logout{display:none !important}}
