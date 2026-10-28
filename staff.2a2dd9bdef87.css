@@ -1,0 +1,186 @@
+[hidden] { display: none !important; }   /* hidden 屬性優先於 .tabs 等 display 設定（登入前不顯示分頁） */
+:root { --bg: #ffffff; --fg: #1e293b; --muted: #475569; --line: #cbd5e1; --panel: #f8fafc; --accent: #1d4e89; --accent-fg: #ffffff; --ok: #166534; --ok-bg: #e7f5ec; --err: #991b1b; --err-bg: #fdecec; --warn: #854d0e; --warn-bg: #fff7e0; --chip: #e2e8f0; }
+@media (prefers-color-scheme: dark) { :root { --bg: #0f172a; --fg: #e2e8f0; --muted: #a3b1c6; --line: #334155; --panel: #16213a; --accent: #7fb2f0; --accent-fg: #0b1220; --ok: #bbf7d0; --ok-bg: #0f3a22; --err: #fecaca; --err-bg: #4a1414; --warn: #fde68a; --warn-bg: #3f3310; --chip: #1e2b45; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif; }
+.skip-link { position: absolute; left: -9999px; } .skip-link:focus { left: 8px; top: 8px; background: var(--bg); padding: 8px; z-index: 10; }
+.top { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 5; }
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; max-width: 1180px; margin: 0 auto; flex-wrap: wrap; }
+.brand { font-weight: 700; font-size: 1.1rem; } .brand small { display: block; font-weight: 400; color: var(--muted); font-size: .85rem; }
+.who { color: var(--muted); font-size: .9rem; }
+.tabs { display: flex; gap: 4px; padding: 0 16px; max-width: 1180px; margin: 0 auto; overflow-x: auto; }
+.tab { border: 0; background: none; padding: 10px 14px; font: inherit; color: var(--muted); border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+.tab[aria-current="page"] { color: var(--fg); border-bottom-color: var(--accent); font-weight: 700; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 16px; }
+.foot { max-width: 1180px; margin: 24px auto; padding: 0 16px; color: var(--muted); font-size: .85rem; }
+.panel { border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin: 0 0 16px; background: var(--bg); }
+.panel h2 { margin: 0 0 10px; font-size: 1.15rem; } .panel h3 { margin: 14px 0 8px; font-size: 1rem; }
+.muted { color: var(--muted); } .small { font-size: .88rem; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: end; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+label.f { display: grid; gap: 4px; font-size: .9rem; font-weight: 600; }
+input, select, textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); min-height: 40px; }
+input:focus-visible, select:focus-visible, button:focus-visible, .tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn { font: inherit; border-radius: 8px; padding: 8px 14px; border: 1px solid var(--accent); background: var(--bg); color: var(--accent); cursor: pointer; min-height: 40px; }
+.btn.primary { background: var(--accent); color: var(--accent-fg); }
+.btn.small { padding: 4px 10px; min-height: 32px; font-size: .88rem; }
+.btn.danger { border-color: var(--err); color: var(--err); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.table-scroll { overflow-x: auto; }
+.table-scroll:focus { outline: 2px solid var(--focus, #1a5fb4); outline-offset: 2px; }
+.med-truth { min-width: 760px; }
+.med-truth td, .med-truth th { vertical-align: top; }
+hr.thin { border: 0; border-top: 1px solid #ddd; margin: 4px 0; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+thead th { background: var(--panel); position: sticky; top: 0; }
+.chip { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--chip); font-size: .8rem; margin: 1px 2px; white-space: nowrap; }
+.chip.ok { background: var(--ok-bg); color: var(--ok); } .chip.err { background: var(--err-bg); color: var(--err); } .chip.warn { background: var(--warn-bg); color: var(--warn); }
+.sync { max-width: 1180px; margin: 8px auto 0; padding: 0 16px; font-weight: 600; min-height: 1.6em; }
+.sync[data-state="SAVING"] { color: var(--muted); } .sync[data-state="SAVED"] { color: var(--ok); } .sync[data-state="FAILED"], .sync[data-state="CONFLICT"] { color: var(--err); }
+.notice { padding: 10px 12px; border-radius: 8px; margin: 8px 0; } .notice.err { background: var(--err-bg); color: var(--err); } .notice.ok { background: var(--ok-bg); color: var(--ok); } .notice.warn { background: var(--warn-bg); color: var(--warn); }
+.staged { border-left: 4px solid var(--accent); padding-left: 10px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.tile { border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.tile .v { font-size: 1.6rem; font-weight: 700; } .tile .d { font-size: .82rem; color: var(--muted); }
+.spark { width: 180px; height: 40px; vertical-align: middle; }
+.spark polyline { fill: none; stroke: var(--accent); stroke-width: 2; } .spark circle { fill: var(--accent); }
+.linkbox { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .85rem; word-break: break-all; background: var(--panel); padding: 8px; border-radius: 8px; }
+details > summary { cursor: pointer; font-weight: 600; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.badge { display: inline-block; min-width: 1.4em; margin-left: 6px; padding: 0 6px; border-radius: 999px; background: var(--err); color: var(--bg); font-size: .78rem; font-weight: 700; text-align: center; }
+.sysbar { max-width: 1180px; margin: 8px auto 0; padding: 0 16px; }
+.sysbar .notice { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.alert-card { border: 2px solid var(--err); border-radius: 10px; padding: 12px; margin: 8px 0; }
+.alert-card.overdue { background: var(--err-bg); }
+.field-err { color: var(--err); font-weight: 600; }
+.print-plan { display: none; }
+/* 4.9.3 WP-A：分頁用途一句話、可收合的「我的病人」 */
+.tab-purpose { margin: 4px 0 10px; color: var(--muted); border-left: 3px solid var(--line, #c9d3dd); padding-left: 8px; }
+.inline-h { display: inline; font-size: inherit; margin: 0; }
+#mine_box > summary { cursor: pointer; list-style-position: inside; }
+@media print {
+  .top, .tabs, .sync, .sysbar, .btn, form, .noprint { display: none !important; } .panel { break-inside: avoid; }
+  body.printing-plan .wrap, body.printing-plan .foot { display: none !important; }
+  body.printing-plan .print-plan { display: block; font-size: 14pt; line-height: 1.6; }
+  .print-plan h1 { font-size: 20pt; margin: 0 0 6pt; } .print-plan h2 { font-size: 15pt; margin: 12pt 0 4pt; border-bottom: 1pt solid #000; }
+  .print-plan table { width: 100%; border-collapse: collapse; } .print-plan td, .print-plan th { border: 1pt solid #000; padding: 4pt 6pt; }
+  .print-plan .rung { border-left: 6pt solid #000; padding-left: 8pt; margin: 6pt 0; }
+}
+
+/* 病人連結 QR code */
+.qr { margin: .75rem 0 0; max-width: 240px; }
+.qr svg { width: 100%; height: auto; background: #fff; border: 1px solid #ccd; }
+
+/* 臨床教學 */
+fieldset.levels, fieldset.chips { border: 1px solid #ccd; border-radius: 6px; padding: .5rem .75rem; margin: .75rem 0; }
+fieldset.levels legend, fieldset.chips legend { font-weight: 600; padding: 0 .25rem; }
+label.lv { display: flex; gap: .5rem; align-items: flex-start; padding: .35rem .25rem; min-height: 44px; }
+label.chipbox { display: inline-flex; gap: .35rem; align-items: center; margin: .25rem .5rem .25rem 0; min-height: 44px; padding: 0 .5rem; border: 1px solid #ccd; border-radius: 999px; }
+.dist { display: inline-flex; gap: 2px; } .dist span { min-width: 1.6em; text-align: center; border: 1px solid #ccd; border-radius: 3px; font-variant-numeric: tabular-nums; }
+ul.kpis { display: flex; flex-wrap: wrap; gap: .75rem; list-style: none; padding: 0; } ul.kpis li { border: 1px solid #ccd; border-radius: 6px; padding: .5rem .75rem; min-width: 9rem; }
+ul.kpis strong { display: block; font-size: 1.3rem; }
+table.matrix td { text-align: center; font-size: .9rem; } table.matrix td.na { color: #555; } table.matrix td.ready { outline: 2px dashed #7a5c00; outline-offset: -3px; } table.matrix td.dec { font-weight: 600; }
+.linkbtn { background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; cursor: pointer; font: inherit; min-height: 44px; }
+.f.wide { flex: 1 1 100%; } .f.wide input { width: 100%; }
+
+ul.plain { list-style: none; padding-left: 0; } ul.plain li { padding: .35rem 0; border-bottom: 1px solid #eee; }
+.btn.ghost { background: transparent; }
+
+/* 2.8.0 照護計畫（Patient Cockpit） */
+.ptabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+.cockpit h3 { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 10px; }
+ol.plain { list-style: none; padding-left: 0; } li.pmsg { border-left: 4px solid var(--line); padding: 6px 10px; margin: 8px 0; }
+li.pmsg ul.why { margin: 2px 0 4px 1em; color: var(--muted); }
+details.edu-rec { margin: 4px 0; }
+@media print { body.printing-plan .print-plan.large { font-size: 17pt; } }
+/* W5-L（5.0 K08-04）：新版單張——A4 一頁核心（字級 10.5pt、段落間距縮小）＋附件頁另起一頁；大字需要時仍放大（可能超過一頁，不縮字硬塞） */
+@media print {
+  body.printing-plan .print-plan.v5 { font-size: 10.5pt; line-height: 1.3; }
+  .print-plan.v5 h1 { font-size: 15pt; margin: 0 0 2pt; } .print-plan.v5 h2 { font-size: 11.5pt; margin: 5pt 0 1pt; }
+  .print-plan.v5 p, .print-plan.v5 ul, .print-plan.v5 ol { margin: 2pt 0; } .print-plan.v5 li { margin: 1pt 0; }
+  .print-plan.v5 .rung { margin: 3pt 0; padding-left: 6pt; } .print-plan.v5 td, .print-plan.v5 th { padding: 2pt 4pt; font-size: 10pt; }
+  .print-plan.v5 .v5-appendix { break-before: page; page-break-before: always; }
+  body.printing-plan .print-plan.v5.large { font-size: 15pt; }
+  /* 5.1 W51-LEAF（NU-01）：求救分區每項一行（兩欄排，維持 A4 一頁核心）；本次警訊加粗；14 天表 */
+  .print-plan.v5 h2 { margin: 4pt 0 1pt; } .print-plan.v5 .rung { margin: 2pt 0; } .print-plan.v5 #v5_tb td { padding: 1pt 4pt; }
+  .print-plan.v5 p.v5-lv { margin: 1pt 0 0; }
+  .print-plan.v5 p.v5-diff { border-left: 3pt solid #555; padding-left: 5pt; margin: 3pt 0; }
+  .print-plan.v5 ul.v5-sig { columns: 2; column-gap: 14pt; margin: 0 0 1pt; padding-left: 14pt; }
+  .print-plan.v5 ul.v5-sig li { break-inside: avoid; margin: 0; }
+  .print-plan.v5 table.v5-diary { width: 100%; border-collapse: collapse; } .print-plan.v5 table.v5-diary td, .print-plan.v5 table.v5-diary th { border: 1px solid #555; height: 15pt; font-size: 9pt; }
+}
+/* 學習目標（schema 3.8） */
+table.facets td, table.facets th { vertical-align: top; }
+.tl-item { white-space: nowrap; }
+/* 3.0.0 照護旅程列、直達目標標示、窄螢幕（320px）重排 */
+.journey .jrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px 16px; }
+.target-hl { outline: 3px solid var(--accent); outline-offset: 2px; background: rgba(29, 78, 216, .06); }
+@media (max-width: 480px) {
+  .row { flex-wrap: wrap; }
+  .tiles { grid-template-columns: 1fr; }
+  label.f { min-width: 0; width: 100%; }
+  select, input { max-width: 100%; }
+  .ptabs { display: flex; flex-wrap: wrap; gap: 6px; }
+}
+
+/* ===== 3.1 設計層：與病人端同一套醫療藍灰；層級靠字重與留白，不靠色塊；只覆寫視覺 ===== */
+:root { --bg: #ffffff; --ground: #f4f7f9; --fg: #15242d; --muted: #4a5d6b; --line: #d3dee5; --panel: #eef3f6; --accent: #1e5a78; --accent-2: #16455d; --accent-soft: #e3eef4; --shadow: 0 1px 2px rgba(16,42,58,.06), 0 4px 14px rgba(16,42,58,.05); }
+@media (prefers-color-scheme: dark) { :root { --bg: #16222a; --ground: #0f171c; --fg: #e6eef2; --muted: #a7b8c3; --line: #2e404b; --panel: #1c2b34; --accent: #7fb6d3; --accent-2: #a9d0e4; --accent-fg: #0f171c; --accent-soft: #1d3441; --shadow: 0 1px 2px rgba(0,0,0,.4); } }
+body { background: var(--ground); letter-spacing: .01em; -webkit-font-smoothing: antialiased; }
+.top { background: var(--bg); box-shadow: 0 1px 0 var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; letter-spacing: .03em; }
+.brand .mark { width: 30px; height: 30px; color: var(--accent); background: var(--accent-soft); border-radius: 8px; padding: 4px; flex: 0 0 auto; }
+.tabs { gap: 2px; }
+.tab { padding: 12px 16px; font-weight: 600; transition: color .15s, border-color .15s; }
+.tab:hover { color: var(--fg); }
+.panel { background: var(--bg); box-shadow: var(--shadow); border-radius: 12px; padding: 20px; }
+.panel h2 { font-size: 1.2rem; letter-spacing: .02em; }
+.btn { transition: background .15s, color .15s, border-color .15s; font-weight: 600; }
+.btn:hover { background: var(--accent-soft); }
+.btn.primary:hover { background: var(--accent-2); }
+.btn.danger:hover { background: var(--err-bg); }
+thead th { font-weight: 700; color: var(--muted); font-size: .82rem; letter-spacing: .04em; }
+tbody tr:hover td { background: var(--panel); }
+.alert-card { border-radius: 12px; box-shadow: var(--shadow); background: var(--bg); }
+.tile { background: var(--bg); box-shadow: var(--shadow); border-radius: 12px; }
+.ptabs { display: flex; gap: 6px; flex-wrap: wrap; padding: 4px; background: var(--panel); border-radius: 12px; width: fit-content; max-width: 100%; }
+.ptabs .btn { border-color: transparent; background: transparent; }
+.ptabs .btn.primary, .ptabs .btn[aria-current="page"] { background: var(--bg); color: var(--accent); box-shadow: var(--shadow); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media print { .panel, .tile, .alert-card { box-shadow: none; } body { background: #fff; } }
+/* v2：資料密集的工作畫面不用陰影卡片；靠細線、底色與字重分層 */
+.panel, .tile, .alert-card { box-shadow: none; }
+.panel { border-color: var(--line); }
+.alert-card { border-width: 0 0 0 6px; border-style: solid; border-color: var(--err); background: var(--err-bg); }
+.ptabs .btn.primary, .ptabs .btn[aria-current="page"] { box-shadow: 0 0 0 1px var(--line); }
+/* 3.2 客觀數據一覽：醫師與藥師先看的數字；一格一個量值，數字最大、日期與可用性其次 */
+.objgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.obj { display: grid; gap: 2px; padding: 10px 12px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.obj-l { font-size: .82rem; color: var(--muted); font-weight: 600; }
+.obj-v { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.obj-v small { font-size: .78rem; font-weight: 400; color: var(--muted); }
+.obj-bad { background: var(--warn-bg); }
+/* 3.3 核心藥物：每類一組（狀態／劑量／理由） */
+fieldset.fmt-row{border:1px solid var(--line,#d6dde5);border-radius:6px;padding:4px 10px;margin:6px 0}
+fieldset.fmt-row legend{font-weight:600;font-size:.92em;padding:0 4px}
+/* 3.4（T02）客觀數據的附註：較新未確認值、已確認序列、與乾體重差距（只列事實） */
+.obj-x { color: var(--muted); }
+
+/* 3.4（T11）：治理說明預設收合（全文保留）；動作、錯誤、安全提示不收合 */
+details.help { margin: 2px 0; }
+details.help > summary { font-size: .85em; color: var(--muted); cursor: pointer; width: fit-content; }
+
+
+/* ===== 5.3.1 BP-DASH：缺口看板、完整度熱圖、漏斗（狀態一律另有文字，不只靠顏色） ===== */
+.kb { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 8px 0 16px; }
+.kb-col { border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: var(--panel); }
+.kb-col h3 { margin: 0 0 8px; font-size: .95rem; }
+.kb-card { border: 1px solid var(--line); border-radius: 8px; padding: 8px; margin: 0 0 8px; background: var(--bg); list-style: none; }
+ul.plain { list-style: none; padding: 0; margin: 0; }
+td.num { font-variant-numeric: tabular-nums; text-align: right; }
+.hm td[data-fs="MISSING"] { background: var(--err-bg); color: var(--err); }
+.hm td[data-fs="STALE"] { background: var(--warn-bg); color: var(--warn); }
+.hm td[data-fs="UNKNOWN"] { background: var(--panel); }
+.hm td[data-fs="VALID"] { color: var(--ok); }
+@media (prefers-reduced-motion: reduce) { #dash_drill { scroll-behavior: auto; } }
